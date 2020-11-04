@@ -1,3 +1,4 @@
+using System;
 using Newtonsoft.Json;
 
 namespace CSharpRxConsole
@@ -19,6 +20,18 @@ namespace CSharpRxConsole
 
         [JsonProperty("avatar")]
         public string Avatar { get; set; }
+        
+        public static User Create(User source)
+        {
+            return new User()
+            {
+                Id = source.Id,
+                Email = source.Email,
+                FirstName = source.FirstName,
+                LastName = source.LastName,
+                Avatar = source.Avatar
+            };
+        }
     }
 
     public class PagedUsers
