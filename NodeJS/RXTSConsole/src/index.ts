@@ -1,7 +1,15 @@
 
 import {user, pagedUsers} from './users';
-import { getData, getObservableUsers } from './service'
+import { getUsers, getObservableSample, getObservableUsers } from './service'
 import { filter, map, } from 'rxjs/operators';
+import { async } from 'rxjs';
+
+console.log('--- SAMPLE ---');
+getObservableSample().then( data => {
+    data.subscribe(s => {
+        console.log(`- ${s}`);
+    });
+});
 
 // getData().then( users => {
 //     console.log(`${users?.total} users found !`);
@@ -19,6 +27,11 @@ import { filter, map, } from 'rxjs/operators';
 //     );
 // });
 
+
+// TODO: How await to finish previous async actions ??? 
+console.log('--- Observable Users ---');
+ 
+
 //
 // 'pipe', is used to add operatros: filter, map, scan, reduce, ...
 // Operators samples: https://www.learnrxjs.io/learn-rxjs/operators
@@ -29,7 +42,7 @@ getObservableUsers().then ( data  => {
         .pipe(
             filter( u => u.last_name.startsWith('F')),
             // map using deconstructor
-            map( u => ({ ...u, email: u.email.replace('@rqres.in', '@rxjs.dev') }) ),                
+            map( u => ({ ...u, email: u.email.replace('@reqres.in', '@rxjs.dev') }) ),                
         )
         .subscribe(
             (u) => console.log(`   - ${u.first_name} ${u.last_name} - ${u.email}`),

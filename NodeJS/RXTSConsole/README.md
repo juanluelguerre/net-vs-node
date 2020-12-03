@@ -1,5 +1,7 @@
 # Typescript + NodeJS
 
+NodeJS sample to call a REST API using Type Script, so defining types -> Easy development with less errors thanks to Intellinse !
+
 1. Run commands to install dependencies:
 
 ```

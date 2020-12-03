@@ -1,3 +1,7 @@
+//
+// We don't need define types/interfaces !
+//
+
 // let user = {
 //     id: number,
 //     first_name: string,

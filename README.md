@@ -1,13 +1,13 @@
 # Samples, benchmark, training and so on about Net/NetCore/Net5 and NodeJS/NestJS
 
 ## DotNet Project
-[NodeJS+TS](./CSharpRxConsole/README.md)
-
+- [Csharp RX](./CSharp/RxConsole/README.md)
+- [Csharp Sexy Console](./CSharp/SexyConsole/README.md)
 ## NodeJS Project
-[NodeJS+TS](./NodeRxConsole/README.md)
+[NodeJS](./NodeJS/RxConsole/README.md)
 
 ## NodeJS + TypeScript Project
-[NodeJS+TS](./NodeTSRxConsole/README.md)
+[NodeJS+TS](./NodeJS/TypeScriptRxConsole/README.md)
 
 # Reactive Programming
 - Stream.
