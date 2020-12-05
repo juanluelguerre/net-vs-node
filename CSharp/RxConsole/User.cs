@@ -51,5 +51,4 @@ namespace CSharpRxConsole
         [JsonProperty("data")]
         public User[] Users { get; set; }
     }
-
 }

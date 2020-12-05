@@ -6,11 +6,11 @@ using BenchmarkDotNet.Attributes;
 
 namespace CSharpRxConsole
 {
-    public class ObserableSamples
+    public class BenchmarSamples
     {
         Service _service;
 
-        public ObserableSamples()
+        public BenchmarSamples()
         {
             _service = new Service(new HttpClient());
         }
@@ -18,7 +18,7 @@ namespace CSharpRxConsole
         [Benchmark]
         public async Task GetUsers_Observable()
         {
-            var users = await _service.GetObservable();
+            var users = await _service.GetObservableUsers();
 
             users
                 .Where(u => u.LastName.StartsWith("F"))
@@ -33,7 +33,7 @@ namespace CSharpRxConsole
         [Benchmark]
         public async Task GetUsers_ToObservable()
         {
-            var users = await _service.GetToObservable();
+            var users = await _service.GetUsersToObservable();
 
             users
                 .Where(u => u.LastName.StartsWith("F"))
