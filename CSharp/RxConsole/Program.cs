@@ -1,22 +1,33 @@
 ﻿using System;
+using System.Linq;
 using System.Net.Http;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
 using System.Threading.Tasks;
 using BenchmarkDotNet.Running;
-using RxConsole;
 
-namespace CSharpRxConsole
+namespace ElGuerre.RxConsole
 {
 	public static class Program
 	{
 		public static async Task Main(string[] args)
 		{
+			//
+			// Reactive Programming Pattern
+			//
+			//x.Subscribe(
+			//	(u) => Console.WriteLine(""),
+			//	(err) => Console.WriteLine(),
+			//	() => Console.WriteLine()
+			//).Dispose();
+
 
 			#region  LESSON 1) Basic samples
 
+			Console.WriteLine("*** REACTIVE PROGRAMMING ***");
+
 			var samples = new BasicSamples();
-			await samples.DoSample1();
+
 
 			samples.DoSample1().Subscribe(s => Console.WriteLine(s)).Dispose();
 			samples.DoSample2().Subscribe(s => Console.WriteLine(s)).Dispose();
@@ -42,16 +53,24 @@ namespace CSharpRxConsole
 			Console.ReadLine();
 
 			#endregion
-		
-			#region LESSON 2): Director "files" watcher using Observables !
 
-			//var fm = new FileEventsManager(@"files");
-			//fm.Created.Subscribe(e => Console.WriteLine("{0} was created.", e.FullPath));
-			//fm.Renamed.Subscribe(e => Console.WriteLine("{0} was renamed to {1}.", e.OldFullPath, e.FullPath));
-			//fm.Deteleted.Subscribe(e => Console.WriteLine("{0} was deleted.", e.FullPath));
+			#region LESSON 2) Using Services (Same Javascript samples)
 
-			//Console.WriteLine("Press ENTER to exit !");
-			//Console.ReadLine();
+			var service = new Service(new HttpClient());
+			service.GetObservableSample().Subscribe(s => Console.WriteLine(s));
+
+			var someUsers = await service.GetObservableUsersAsync();
+			someUsers.Subscribe(u => Console.WriteLine($"{u.FirstName} {u.LastName} - {u.Email}"));
+
+			var otherUsers = await service.GetObservableUsersAsync_2();
+			otherUsers.Subscribe(u => Console.WriteLine($"{u.FirstName} {u.LastName} - {u.Email}"));
+
+
+			// Review/show Benchmark !
+			// BenchmarkRunner.Run<ObserableSamples>();
+
+			Console.WriteLine("Press ENTER to exit !");
+			Console.ReadLine();
 
 			#endregion
 
@@ -70,22 +89,38 @@ namespace CSharpRxConsole
 
 			#endregion
 
-			#region LESSON 4) Using Services (Same Javascript samples)
+			#region LESSON 4): Manage "files" watcher using Observables !
 
-			var service = new Service(new HttpClient());
-			service.GetObservableSample().Subscribe(s => Console.WriteLine(s));
+			const string FILES_PATH = @"fiels";
 
-			var users = await service.GetUsersToObservable();
-			users.Subscribe(u => Console.WriteLine($"{u.FirstName} {u.LastName} - {u.Email}"));
-
-			var otherUsers = await service.GetObservableUsers();
-			otherUsers.Subscribe(u => Console.WriteLine($"{u.FirstName} {u.LastName} - {u.Email}"));
-
-			// Review/show Benchmark !
-			// BenchmarkRunner.Run<ObserableSamples>();
+			var fm = new FileEventsManager(FILES_PATH);
+			fm.Created.Subscribe(e => Console.WriteLine("{0} was created.", e.FullPath));
+			fm.Renamed.Subscribe(e => Console.WriteLine("{0} was renamed to {1}.", e.OldFullPath, e.FullPath));
+			fm.Deteleted.Subscribe(e => Console.WriteLine("{0} was deleted.", e.FullPath));
 
 			Console.WriteLine("Press ENTER to exit !");
 			Console.ReadLine();
+
+			#endregion
+
+			#region LESSON 5): Linq VS Pipes (in Javascript).
+
+			var users = await service.GetObservableUsersAsync();
+			users
+				.Where(u => u.LastName.StartsWith("F"))
+				.Select(u => new
+				{
+					u.Id,
+					u.Avatar,
+					Email = u.Email.Replace("@reqres.in", "@rxjs.dev"),
+					u.FirstName,
+					u.LastName
+				})
+				.Subscribe(
+					(u) => Console.WriteLine(u.Email),
+					(err) => Console.WriteLine(),
+					() => Console.WriteLine()
+				).Dispose();
 
 			#endregion
 		}

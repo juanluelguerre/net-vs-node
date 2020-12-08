@@ -2,7 +2,7 @@
 using System.IO;
 using System.Reactive.Linq;
 
-namespace CSharpRxConsole
+namespace ElGuerre.RxConsole
 {
     /// <summary>
     /// https://docs.microsoft.com/en-us/previous-versions/dotnet/reactive-extensions/hh229241(v=vs.103)
@@ -32,54 +32,46 @@ namespace CSharpRxConsole
         {
             // Use the FromEvent operator to setup a subscription to the CREATED event.
             Created = Observable.FromEvent<FileSystemEventHandler, FileSystemEventArgs>(handler =>
-            {
-                FileSystemEventHandler fsHandler = (sender, e) =>
                 {
-                    handler(e);
-                };
+                    FileSystemEventHandler fsHandler = (sender, e) =>
+                    {
+                        handler(e);
+                    };
 
-                return fsHandler;
-            },
+                    return fsHandler;
+                },
                 fsHandler => _fsw.Created += fsHandler,
                 fsHandler => _fsw.Created -= fsHandler
-            );
-
-            // Created.Subscribe(e => Console.WriteLine("{0} was created.", e.FullPath));
+            );          
 
             //  Use the FromEvent operator to setup a subscription to the RENAMED event.
             Renamed = Observable.FromEvent<RenamedEventHandler, RenamedEventArgs>(handler =>
-            {
-                RenamedEventHandler fsHandler = (sender, e) =>
                 {
-                    handler(e);
-                };
+                    RenamedEventHandler fsHandler = (sender, e) =>
+                    {
+                        handler(e);
+                    };
 
-                return fsHandler;
-            },
+                    return fsHandler;
+                },
                 fsHandler => _fsw.Renamed += fsHandler,
                 fsHandler => _fsw.Renamed -= fsHandler
             );
 
-            // Renamed.Subscribe(e => Console.WriteLine("{0} was renamed to {1}.", e.OldFullPath, e.FullPath));
-
-
             // Use the FromEvent operator to setup a subscription to the DELETED event.
             Deteleted = Observable.FromEvent<FileSystemEventHandler, FileSystemEventArgs>(handler =>
-            {
-                FileSystemEventHandler fsHandler = (sender, e) =>
                 {
-                    handler(e);
-                };
+                    FileSystemEventHandler fsHandler = (sender, e) =>
+                    {
+                        handler(e);
+                    };
 
-                return fsHandler;
-            },
+                    return fsHandler;
+                },
                 fsHandler => _fsw.Deleted += fsHandler,
                 fsHandler => _fsw.Deleted -= fsHandler
             );
-
-            // Deteleted.Subscribe(e => Console.WriteLine("{0} was deleted.", e.FullPath));
         }
-
 
     }
 }

@@ -1,5 +1,5 @@
 //
-// We don't need define types/interfaces !
+// We don't need define types/interfaces if we don't use Type Script. Look for RXTSConsole for in this case !
 //
 
 // let user = {

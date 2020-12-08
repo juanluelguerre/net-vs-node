@@ -1,8 +1,9 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using ShellProgressBar;
 
-namespace SexyConsole
+namespace ElGuerre.SexyConsole
 {
     public class Program
     {
@@ -10,17 +11,44 @@ namespace SexyConsole
         {
             Console.WriteLine("Hello World!");
 
-
-            // Console.WriteLine("Press ENTER to exit !");
-            // Console.ReadLine();
-
-            // LESSON 5)  ConsoleSpinner
+            // LESSON 1)  ConsoleSpinner
             await WorkingWithSpinner(0);
             // await WorkingWithSpinner(4);
             // await WorkingWithSpinner(5);
 
-            // LESSON 4): Utilities like progress bar !
+            // LESSON 2): Utilities like progress bar !
             await WorkingWithProgressBar();
+
+            // Console.WriteLine("Press ENTER to exit !");
+            // Console.ReadLine();
+        }
+
+        /// <summary>
+        /// Manage Keys to exit correctly. Press Ctrl + C to exit correctly.
+        /// </summary>
+        /// <returns></returns>
+        private static Task ConfigureKeys()
+        {
+            // When press Ctrl + C
+            Console.CancelKeyPress += (sender, e) =>
+            {                
+                Debug.WriteLine("Exiting...");
+                Environment.Exit(0);
+            };
+
+            // Create a new task to control ESC key press when progress end.
+            var taskKeys = new Task(() =>
+            {
+                var key = new ConsoleKeyInfo();
+
+                while (!Console.KeyAvailable && key.Key != ConsoleKey.Escape)
+                {
+                    key = Console.ReadKey(true);
+
+                    // TODO: Do more thing when one key is pressed !
+                }
+            });
+            return taskKeys;
         }
 
         private static async Task WorkingWithSpinner(int sequenceCode)
@@ -50,31 +78,7 @@ namespace SexyConsole
             // Console.ReadLine(); 
             var tasks = new[] { taskKeys };
             Task.WaitAll(tasks);
-        }
-
-        private static Task ConfigureKeys()
-        {
-            // When press Ctrl + C
-            Console.CancelKeyPress += (sender, e) =>
-            {
-                Console.WriteLine("Exiting...");
-                Environment.Exit(0);
-            };
-
-            // Create a new task to control ESC key press when progress end.
-            var taskKeys = new Task(() =>
-            {
-                ConsoleKeyInfo key = new ConsoleKeyInfo();
-
-                while (!Console.KeyAvailable && key.Key != ConsoleKey.Escape)
-                {
-                    key = Console.ReadKey(true);
-
-                    // TODO: Do more thing when one key is pressed !
-                }
-            });
-            return taskKeys;
-        }
+        }       
 
         /// <summary>
         /// Avoid While(true), using progress-bar and Observables woking with Console. 

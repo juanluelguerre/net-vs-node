@@ -4,7 +4,7 @@ import { pagedUsers, user } from './users';
 
 
 // Observable sample
-export const getObservableSample = async () => {
+export const getSampleAsync = async () => {
   
   var observable = new Observable((observer) => {
     observer.next('Hello Juanlu!');
@@ -18,7 +18,7 @@ export const getObservableSample = async () => {
 
 const URL = 'https://reqres.in/api/users';
 
-export const getUsers = async () => {
+export const getUsersAsync = async () => {
   try {
     const response = await axios.get<pagedUsers>(`${URL}?pages=1&per_page=50`);
     const users = response.data;
@@ -29,8 +29,8 @@ export const getUsers = async () => {
 };
 
 // Using 'from' to create an observable from an array of items. Users in this case.
-export const getObservableUsers = async () =>{
-  const data = await getUsers() as pagedUsers;
+export const getObservableUsersAsync = async () =>{
+  const data = await getUsersAsync() as pagedUsers;
   const obs = from(data.data);
   
   return obs;

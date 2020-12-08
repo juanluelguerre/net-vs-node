@@ -12,7 +12,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Timers;
 
-namespace RxConsole
+namespace ElGuerre.RxConsole
 {
 	public class BasicSamples
 	{
@@ -20,7 +20,8 @@ namespace RxConsole
 		public IObservable<string> DoSample1()
 		{
 			var subject = new ReplaySubject<string>();
-			subject.OnNext("Value");
+			subject.OnNext("Value 1");
+			subject.OnNext("Value 2");
 			subject.OnCompleted();
 
 			return subject;

@@ -9,9 +9,8 @@ using System.Reactive.Disposables;
 //
 // https://reqres.in/
 //
-namespace CSharpRxConsole
+namespace ElGuerre.RxConsole
 {
-
     public class Service
     {
         private const string URL = "https://reqres.in/api/users";
@@ -55,14 +54,7 @@ namespace CSharpRxConsole
             return users;
         }
 
-        public async Task<IObservable<User>> GetUsersToObservable()
-        {
-            var data = await GetUsersAsync();
-
-            return data.Users.ToObservable();
-        }
-
-        public async Task<IObservable<User>> GetObservableUsers()
+        public async Task<IObservable<User>> GetObservableUsersAsync()
         {
             var data = await GetUsersAsync();
 
@@ -77,6 +69,14 @@ namespace CSharpRxConsole
             });
 
             return observable;
+        }
+
+        
+        public async Task<IObservable<User>> GetObservableUsersAsync_2()
+        {
+            var data = await GetUsersAsync();
+
+            return data.Users.ToObservable();
         }
     }        
 }

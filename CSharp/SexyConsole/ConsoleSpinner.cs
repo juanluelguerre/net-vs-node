@@ -1,5 +1,6 @@
 ﻿using System;
-namespace SexyConsole
+
+namespace ElGuerre.SexyConsole
 {
     /// <summary>
     /// <seealso cref="https://stackoverflow.com/questions/1923323/console-animations"/>

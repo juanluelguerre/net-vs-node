@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 
-namespace SexyConsole
+namespace ElGuerre.SexyConsole
 {
     internal class BusyIndicator
     {

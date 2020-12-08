@@ -16,10 +16,13 @@
 //       });      
 // });
 
+//
+// Using axios dependency 
+//
 const axios = require("axios");
 const URL = 'https://reqres.in/api/users';
 
-const getData = async () => {
+const getUsersAsync = async () => {
   try {
     const response = await axios.get(`${URL}?pages=1&per_page=50`);
     const users = response.data;
@@ -29,8 +32,8 @@ const getData = async () => {
   }
 };
 
-// exports.getData = getData;
+// exports.getUsersAsync = getUsersAsync;
 module.exports = {
-    getData
+  getUsersAsync
 }
 

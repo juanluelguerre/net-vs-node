@@ -4,13 +4,13 @@ using System.Reactive.Linq;
 using System.Threading.Tasks;
 using BenchmarkDotNet.Attributes;
 
-namespace CSharpRxConsole
+namespace ElGuerre.RxConsole
 {
-    public class BenchmarSamples
+    public class BenchmarkSamples
     {
         Service _service;
 
-        public BenchmarSamples()
+        public BenchmarkSamples()
         {
             _service = new Service(new HttpClient());
         }
@@ -18,7 +18,7 @@ namespace CSharpRxConsole
         [Benchmark]
         public async Task GetUsers_Observable()
         {
-            var users = await _service.GetObservableUsers();
+            var users = await _service.GetObservableUsersAsync();
 
             users
                 .Where(u => u.LastName.StartsWith("F"))
@@ -33,7 +33,7 @@ namespace CSharpRxConsole
         [Benchmark]
         public async Task GetUsers_ToObservable()
         {
-            var users = await _service.GetUsersToObservable();
+            var users = await _service.GetObservableUsersAsync_2();
 
             users
                 .Where(u => u.LastName.StartsWith("F"))

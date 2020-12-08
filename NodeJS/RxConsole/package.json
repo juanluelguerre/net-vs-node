@@ -1,0 +1,19 @@
+{
+  "name": "rxconsole",
+  "version": "1.0.0",
+  "description": "Sample rx console",
+  "main": "app.js",
+  "dependencies": {
+    "axios": "^0.21.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "rx",
+    "reactive"
+  ],
+  "author": "JuanluElGuerre",
+  "license": "ISC"
+}

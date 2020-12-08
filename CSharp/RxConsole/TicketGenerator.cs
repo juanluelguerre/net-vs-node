@@ -5,7 +5,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace RxConsole
+namespace ElGuerre.RxConsole
 {
 	// The Ticket class just represents a hypothetical ticket composed of an ID and a timestamp.
 	class Ticket
@@ -51,8 +51,7 @@ namespace RxConsole
         // TicketGenerator generates a new ticket every 3 sec and calls the observer's OnNext handler to deliver it.        
         private void TicketGenerator(object observer)
         {
-            IObserver<Ticket> ticketObserver = (IObserver<Ticket>)observer;
-
+            IObserver<Ticket> ticketObserver = (IObserver<Ticket>) observer;
           
             // Generate a new ticket every 3 sec and call the observer's OnNext handler to deliver it.          
             Ticket t;

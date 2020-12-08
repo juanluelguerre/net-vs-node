@@ -2,7 +2,7 @@
 using System.Reactive.Linq;
 using System.Threading.Tasks;
 
-namespace SexyConsole
+namespace ElGuerre.SexyConsole
 {
     public class NumbersGenerator
     {
