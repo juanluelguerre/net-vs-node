@@ -3,11 +3,12 @@
 ## DotNet Project
 - [Csharp RX](./CSharp/RxConsole/README.md)
 - [Csharp Sexy Console](./CSharp/SexyConsole/README.md)
+
 ## NodeJS Project
-[NodeJS](./NodeJS/RxConsole/README.md)
+[NodeJS](./NodeJS/RxConsole)
 
 ## NodeJS + TypeScript Project
-[NodeJS+TS](./NodeJS/TypeScriptRxConsole/README.md)
+[NodeJS+TS](./NodeJS/RXTSConsole)
 
 # Reactive Programming
 - Stream.
